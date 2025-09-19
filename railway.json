@@ -7,5 +7,20 @@
     "startCommand": "npm start",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
+  },
+  "environments": {
+    "production": {
+      "variables": {
+        "NODE_ENV": "production",
+        "PORT": "3003",
+        "DB_HOST": "${{MYSQLHOST}}",
+        "DB_USER": "${{MYSQLUSER}}",
+        "DB_PASSWORD": "${{MYSQLPASSWORD}}",
+        "DB_NAME": "${{MYSQLDATABASE}}",
+        "DB_PORT": "${{MYSQLPORT}}",
+        "JWT_SECRET": "sgt_jwt_secret_key_2024_secure_token_iasitel_net_production",
+        "JWT_EXPIRES_IN": "24h"
+      }
+    }
   }
 }
