@@ -1,5 +1,5 @@
-const mysql = require('mysql2/promise');
 require('dotenv').config();
+const mysql = require('mysql2/promise');
 
 // Configuración de la base de datos
 const dbConfig = {

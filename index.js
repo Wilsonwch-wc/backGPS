@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 // Configuración específica de CORS para producción
 app.use(cors({
-  origin: ['https://iasitel.net', 'http://localhost:3000', 'http://localhost:5173'],
+  origin: ['https://iasitel.net', 'http://localhost:3000', 'http://localhost:5173', 'https://front-gps.vercel.app'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
