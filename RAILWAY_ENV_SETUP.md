@@ -1,17 +1,21 @@
-# Configuración de Variables de Entorno en Railway
+# Configuración de Variables de Entorno en Railway - SOLUCIÓN URGENTE
 
-## Problema Identificado
-El backend está fallando con el error `ECONNREFUSED ::1:3306` porque Railway no está leyendo las variables de entorno correctamente y está intentando conectarse a localhost en lugar de la base de datos de Railway.
+## 🚨 PROBLEMA CRÍTICO IDENTIFICADO
+El backend está fallando con el error `ECONNREFUSED ::1:3306` porque las variables de entorno en Railway tienen **PLACEHOLDERS** en lugar de los valores reales.
 
-## Solución
+### Variables con Problemas Detectados:
+- ❌ `DB_PASSWORD`: Tiene `your_railway_mysql_password` (placeholder)
+- ❌ `JWT_SECRET`: Tiene `your_jwt_secret_key_here` (placeholder)
 
-### 1. Configurar Variables de Entorno en Railway Dashboard
+## ✅ SOLUCIÓN INMEDIATA
 
-Debes configurar las siguientes variables de entorno en el dashboard de Railway:
+### 1. CORREGIR Variables de Entorno en Railway Dashboard
+
+**IMPORTANTE**: Reemplaza los placeholders con estos valores EXACTOS:
 
 ```
 NODE_ENV=production
-PORT=3003
+PORT=3002
 DB_HOST=interchange.proxy.rlwy.net
 DB_USER=root
 DB_PASSWORD=oONbxfQtqzDbxNiiZPVTeBUKPnAuKpRC
@@ -21,24 +25,54 @@ JWT_SECRET=sgt_jwt_secret_key_2024_secure_token_iasitel_net_production
 JWT_EXPIRES_IN=24h
 ```
 
-### 2. Pasos para Configurar en Railway
+### 2. PASOS DETALLADOS PARA CORREGIR EN RAILWAY
 
-1. Ve a tu proyecto en Railway Dashboard
-2. Selecciona tu servicio backend
-3. Ve a la pestaña "Variables"
-4. Agrega cada variable de entorno una por una
-5. Haz redeploy del servicio
+**PASO 1**: Acceder al Dashboard
+- Ve a https://railway.app/dashboard
+- Selecciona tu proyecto "backGPS"
+- Haz clic en el servicio backend
 
-### 3. Verificación
+**PASO 2**: Configurar Variables
+- Ve a la pestaña "Variables"
+- Busca las variables `DB_PASSWORD` y `JWT_SECRET`
+- **CRÍTICO**: Reemplaza los valores placeholder:
+  - `DB_PASSWORD`: Cambia `your_railway_mysql_password` por `oONbxfQtqzDbxNiiZPVTeBUKPnAuKpRC`
+  - `JWT_SECRET`: Cambia `your_jwt_secret_key_here` por `sgt_jwt_secret_key_2024_secure_token_iasitel_net_production`
 
-Después de configurar las variables de entorno, el backend debería conectarse correctamente a la base de datos de Railway y mostrar:
+**PASO 3**: Verificar Otras Variables
+- Asegúrate de que estas variables estén configuradas correctamente:
+  - ✅ `NODE_ENV=production`
+  - ✅ `PORT=3002`
+  - ✅ `DB_HOST=interchange.proxy.rlwy.net`
+  - ✅ `DB_USER=root`
+  - ✅ `DB_NAME=railway`
+  - ✅ `DB_PORT=28989`
+  - ✅ `JWT_EXPIRES_IN=24h`
 
+**PASO 4**: Guardar y Redesplegar
+- Haz clic en "Save" después de cada cambio
+- Ve a la pestaña "Deployments"
+- Haz clic en "Redeploy" o espera el redeploy automático
+
+### 3. VERIFICACIÓN DEL ÉXITO
+
+**Después de corregir las variables**, verifica que el deployment sea exitoso:
+
+**En los logs de Railway deberías ver**:
 ```
 ✅ Conexión a MySQL establecida correctamente
 📊 Base de datos: railway
 🏠 Host: interchange.proxy.rlwy.net:28989
 👤 Usuario: root
+🚀 Servidor corriendo en puerto 3002
 ```
+
+**Si aún ves errores**:
+- ❌ `ECONNREFUSED ::1:3306` = Variables aún tienen placeholders
+- ❌ `Access denied` = Credenciales incorrectas
+- ✅ `Conexión establecida` = ¡Problema resuelto!
+
+**URL del servicio**: Debería estar disponible en la URL que Railway te proporciona
 
 ### 4. Variables de Railway Automáticas
 
