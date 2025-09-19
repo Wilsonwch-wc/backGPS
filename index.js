@@ -25,11 +25,29 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 // Configuración específica de CORS para producción
 app.use(cors({
-  origin: ['https://iasitel.net', 'http://localhost:3000', 'http://localhost:5173', 'https://front-gps.vercel.app'],
+  origin: function (origin, callback) {
+    const allowedOrigins = ['https://iasitel.net', 'http://localhost:3000', 'http://localhost:5173', 'https://front-gps.vercel.app'];
+    console.log('🔍 CORS Origin check:', origin);
+    
+    // Permitir requests sin origin (como Postman) o desde orígenes permitidos
+    if (!origin || allowedOrigins.includes(origin)) {
+      console.log('✅ CORS Origin permitido:', origin);
+      callback(null, true);
+    } else {
+      console.log('❌ CORS Origin rechazado:', origin);
+      callback(new Error('No permitido por CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
+
+// Middleware adicional para debugging CORS
+app.use((req, res, next) => {
+  console.log(`🌐 ${req.method} ${req.path} - Origin: ${req.headers.origin}`);
+  next();
+});
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
