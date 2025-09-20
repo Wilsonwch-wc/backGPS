@@ -26,7 +26,7 @@ const PORT = process.env.PORT || 3001;
 // Configuración específica de CORS para producción
 app.use(cors({
   origin: function (origin, callback) {
-    const allowedOrigins = ['https://iasitel.net', 'http://localhost:3000', 'http://localhost:5173', 'https://front-gps.vercel.app'];
+    const allowedOrigins = ['https://iasitel.net', 'http://localhost:3000', 'http://localhost:3002', 'http://localhost:5173', 'https://front-gps.vercel.app'];
     console.log('🔍 CORS Origin check:', origin);
     
     // Permitir requests sin origin (como Postman) o desde orígenes permitidos
